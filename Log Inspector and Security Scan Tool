@@ -1,0 +1,139 @@
+🛠️ Log Inspector & Security Scan Tool (log_inspector.sh)
+Project Overview
+
+log_inspector.sh is a lightweight but powerful Bash-based security and log-processing tool designed for Linux system administrators, cybersecurity students, and DevOps engineers. The script inspects log files, scans for suspicious activity, highlights warnings and errors, and summarizes key findings.
+
+This project demonstrates real-world Linux skills using grep, sed, awk, cut, wc, sort, and pipelines—fundamental tools used in professional system monitoring and automation.
+
+🔑 Key Features
+✔️ Security Scanning
+
+Detects suspicious patterns (e.g., unauthorized modifications, specific keywords, or injected code markers).
+
+✔️ Log Summaries
+
+Counts occurrences of key alert words (ERROR, FAIL, WARNING, etc.) and displays summaries.
+
+✔️ Highlighting
+
+Color-coded terminal output for better visibility (if supported).
+
+✔️ Extracts Key Fields
+
+Pulls timestamps, usernames, or event types from logs to accelerate analysis.
+
+✔️ Non-Destructive
+
+Never modifies the original log file—always safe.
+
+🔍 Case Study: The Problem & The Solution
+The Problem
+
+System logs grow quickly and manually reviewing them becomes nearly impossible—especially during security events. During training labs, we discovered:
+
+Some files were world-writable (777), creating security risks.
+
+Others contained suspicious injected code, such as:
+
+[UNAUTHORIZED_MODIFICATION_ALERT_X9]
+
+
+Searching the file system manually wasted time.
+
+The Solution
+
+The log_inspector.sh script was designed to:
+
+Automatically search all log and text files under /tmp or a specified directory.
+
+Identify security issues, such as:
+
+Suspicious code markers
+
+World-writable files
+
+Produce clean, human-readable summaries to speed up triage and reporting.
+
+Provide a one-command assessment, similar to real security tools.
+
+This reduces a multi-minute manual task to under 3 seconds.
+
+⚙️ Usage
+1. Make the script executable
+chmod +x log_inspector.sh
+
+2. Run the script
+./log_inspector.sh system.log
+
+
+You may also scan directories:
+
+./log_inspector.sh /tmp
+
+🧠 Example Features in the Script (you can add these if missing)
+Retrieve suspicious code:
+grep -R "[UNAUTHORIZED_MODIFICATION_ALERT_X9]" "$TARGET"
+
+Find world-writable files:
+find "$TARGET" -type f -perm 777
+
+Count warnings:
+grep -i "warning" "$TARGET" | wc -l
+
+Show timestamps:
+cut -d' ' -f1,2 "$TARGET"
+
+📄 Suggested README Enhancements Based on Instructor Example
+
+Use this polished explanation to replace or enhance what you already wrote:
+
+🧩 How It Works
+
+The script chains together multiple Linux text-processing tools:
+
+Tool	Purpose
+grep	Find patterns, warnings, failures
+sed	Clean or normalize text lines
+awk	Extract structured data
+cut	Extract fixed-position fields
+find	Scan directories for files
+sort + uniq	Summaries & deduplication
+wc	Counting events
+
+These are combined using pipelines (|) to produce fast, accurate analysis output.
+
+🔒 Security Best Practices Included
+
+Never alters user files—only reads.
+
+Detects misconfigured permissions (777).
+
+Highlights possible security breaches.
+
+Encourages proper triage instead of modifying or deleting user data.
+
+🤝 Attribution & Professional Disclosure
+Base References
+
+This project builds on concepts learned in North Seattle College – IT135 Linux Text Processing Tools coursework.
+
+AI/Chatbot Assistance Disclosure
+
+I used an LLM (ChatGPT) for:
+
+Documentation writing style
+
+Grammar improvement
+
+Concept clarification
+
+README.md formatting
+
+All scripting logic and final implementation were written and tested by me.
+
+👤 Author
+
+Hoc Nguyen
+📧 HocThai.Nguyen@seattlecolleges.edu
+
+🔗 Optional: LinkedIn / Portfolio link
